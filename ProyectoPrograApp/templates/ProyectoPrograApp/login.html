@@ -1,0 +1,24 @@
+{% extends "ProyectoPrograApp/base.html" %}
+
+{% load static %}
+
+{% block title %} <title>Iniciar sesión</title> {% endblock %}
+
+{% block content %}
+<div class="login-background">
+    {% include "ProyectoPrograApp/indexBase.html" %}
+</div>
+<div class="login-container">
+    <form action="" class="login-form">
+        <h1 class="text-center">Bienvenido</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Usuario" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Contraseña" required>
+        </div>
+        <button type="submit" id="btnLogin" class="btn btn-login btn-block btn-primary">Iniciar sesión</button>
+        <a href="/registro" class="btn btn-login btn-block btn-secondary">Registrarse</a>
+    </form>
+</div>
+{% endblock %}

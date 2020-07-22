@@ -1,0 +1,45 @@
+{% extends "ProyectoPrograApp/base.html" %}
+
+{% load static %}
+
+{% block title %} <title>Registro</title> {% endblock %}
+
+{% block content %}
+<div class="bg-color"></div>
+<h1 class="text-center">Formulario</h1>
+<form action="" class="form registration-form">
+    <fieldset>
+        <legend class="text-justify">Por favor complete el siguiente formulario para crear su cuenta.</legend>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Usuario" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Contraseña" required>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Correo electrónico" required>
+        </div>
+        <button type="submit" id="btnGuardar" class="btn btn-block btn-primary">Guardar</button>
+        <button type="reset" id="bntLimpiar" class="btn btn-block btn-secondary">Limpar campos</button>
+        <a href="/" class="btn btn-block btn-secondary">Cancelar</a>
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="registration-successful">
+            Registro exitoso
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="user-error">
+            Usuario ya existe
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="email-error">
+            Correo ya registrado
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
