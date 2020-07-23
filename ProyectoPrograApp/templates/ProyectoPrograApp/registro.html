@@ -9,8 +9,6 @@
     <div class="bg-color"></div>
     <h1 class="text-center">Formulario</h1>
 
-    
-        if
 
         <form action="{% url 'guardarUsuario' %}" class="form registration-form" method="POST" > 
          {% csrf_token %}
@@ -21,7 +19,7 @@
         Ha ocurrido un error en los datos, Revise.
         </div>
         {% else %}
-          <div class="alert alert-success" role="alert">
+         <div class="alert alert-success" role="alert">
              Registro Completo
             </div>
         {% endif %}

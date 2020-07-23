@@ -18,7 +18,7 @@
             <input type="password" class="form-control" placeholder="Contraseña" required>
         </div>
         <button type="submit" id="btnLogin" class="btn btn-login btn-block btn-primary">Iniciar sesión</button>
-        <a href="/registro" class="btn btn-login btn-block btn-secondary">Registrarse</a>
+        <a href="{% url 'registrarUsuario' %}" class="btn btn-login btn-block btn-secondary">Registrarse</a>
     </form>
 </div>
 {% endblock %}
