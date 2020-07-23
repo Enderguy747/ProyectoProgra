@@ -6,10 +6,9 @@ from django.db import models
 class Usuario(models.Model):
     idUsuario = models.CharField(max_length=20, primary_key=True)
     contraseña = models.CharField(max_length=45)
-    correo = models.EmailField()
+    correo = models.EmailField(unique=True)
 
-    def __str__(self):
-        return "Id: %s - Contraseña:****** - correo: %s"(self.idUsuario, self.contraseña, self.correo)
+    
 
 class Etiqueta(models.Model):
     nombreEtiqueta = models.CharField(max_length=45)

@@ -1,5 +1,6 @@
 body {
-    background: repeating-linear-gradient(60deg,#3effff,#15ff9e);
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 }
 
 h1, h2 {
@@ -9,6 +10,10 @@ h1, h2 {
 
 form h1 {
     margin: .5em 0;
+}
+
+.center{
+    text-align: center;
 }
 
 .registration-form {
