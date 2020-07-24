@@ -14,6 +14,10 @@
 </head>
 
 <body>
+{% if request.path != '' %}
+
+
+
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-camera" fill="currentColor"
@@ -54,6 +58,7 @@
             </a>
         </div>
     </nav>
+    {% endif %}
     {% block content %}
     {% endblock %}
     <script src="{% static 'ProyectoPrograApp/vendor/jquery/jquery-3.5.1.js' %}"></script>
