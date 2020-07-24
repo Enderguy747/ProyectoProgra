@@ -14,8 +14,9 @@
 </head>
 
 <body>
-{% if request.path != '' %}
-
+{% if request.path != '/' %}
+{% if request.path != '/login' %}
+{% if request.path != '/registrarUsuario' %}
 
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
@@ -58,6 +59,8 @@
             </a>
         </div>
     </nav>
+    {% endif %}
+    {% endif %}
     {% endif %}
     {% block content %}
     {% endblock %}
