@@ -60,6 +60,11 @@ form h1 {
     max-height: 350px;
 }
 
+.galery-btn {
+    /* background-color: yellow; */
+    padding: 0;
+}
+
 .galery-add {
     height: 200px;
 }
