@@ -21,10 +21,10 @@ class Form_registro(HttpRequest):
 def index(request):
     return render(request, 'ProyectoPrograApp/index.html')
 
-
+"""
 def login(request):
     return render(request, 'ProyectoPrograApp/login.html')
-
+"""
 
 def galeria(request):
     return render(request, 'ProyectoPrograApp/galeria.html')
