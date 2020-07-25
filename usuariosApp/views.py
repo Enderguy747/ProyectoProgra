@@ -14,7 +14,7 @@ from .forms import FormularioLogin
 class Login(FormView):
     template_name = 'ProyectoPrograApp/login.html'
     form_class = FormularioLogin
-    succes_url = reverse_lazy('ProyectoPrograApp/galeria.html')
+    success_url = reverse_lazy('ProyectoPrograApp/galeria.html')
 
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)

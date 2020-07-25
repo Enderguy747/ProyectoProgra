@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form action="" method="GET">
+  <input type="text" value="dsdsd" name="txt">
+  <input type="submit" name="" id="" value="filtrar">
+    {% for foto in fotos %}
+    <h1> url: {{foto.url}}</h1>
+    <img src="{{foto.foto.url}}" width="240"> 
+    <p>nombre: {{foto.nombre}}</p> 
+    <p>tipo: {{foto.tipo}}</p> 
+    <p>nombre: {{foto.nombre}}</p> 
+    <p>Es Privada? = {{foto.privada}} </p>
+    <p>{{foto.idUsuario}} </p>
+ 
+   
+    
+
+    {% endfor %}
+  </form>
+</body>
+</html>

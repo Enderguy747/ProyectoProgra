@@ -10,7 +10,7 @@
     <h1 class="text-center">Formulario</h1>
 
 
-        <form action="{% url 'guardarUsuario' %}" class="form registration-form" method="POST" > 
+        <form action="{% url 'login' %}" class="form registration-form" method="POST" > 
          {% csrf_token %}
         <fieldset>
 
@@ -19,9 +19,12 @@
         Ha ocurrido un error en los datos, Revise.
         </div>
         {% else %}
-         <div class="alert alert-success" role="alert">
-             Registro Completo
-            </div>
+        {% if form.is_valid %}
+        <div class="alert alert-success" role="alert">
+            Registro Completo
+           </div>
+        {% endif %}
+         
         {% endif %}
           <legend class="text-justify">Por favor complete el siguiente formulario para crear su cuenta.</legend>
          {{form|crispy}}

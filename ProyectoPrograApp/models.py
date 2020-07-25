@@ -9,7 +9,7 @@ class Usuario(models.Model):
     correo = models.EmailField(unique=True)
 
     def __str__(self):
-        return 'Id:   {} -  correo:  {} -  contraseña:*****'.format(self.idUsuario,self.correo)
+        return 'Id:   {}' .format(self.idUsuario)
 
 
 class Etiqueta(models.Model):
