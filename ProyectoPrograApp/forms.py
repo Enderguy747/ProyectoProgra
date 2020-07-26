@@ -1,10 +1,10 @@
 from django import forms
-from .models import Usuario, Foto, Etiqueta
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
-class FormRegistro(forms.ModelForm):
-     contraseña = forms.CharField(widget=forms.PasswordInput())
-     class Meta:
-        model = Usuario
-        fields = '__all__'
+class CreateUserForm(UserCreationForm):
+    class Meta:
+       model = User
+       fields = ['username','email','password1','password2']
         
