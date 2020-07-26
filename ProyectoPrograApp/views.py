@@ -38,4 +38,4 @@ def cargar(request):
 
 def shit(request):
     fotos = Foto.objects.all()
-    return render(request,'ProyectoPrograApp/try.html',{'fotos':foto})
+    return render(request,'ProyectoPrograApp/try.html',{'fotos':fotos})

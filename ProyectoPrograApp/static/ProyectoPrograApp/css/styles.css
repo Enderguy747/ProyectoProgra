@@ -3,6 +3,14 @@ body {
     background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
 }
 
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+}
+
 h1, h2 {
     position: relative;
     margin: 1em 0;
@@ -17,8 +25,6 @@ form h1 {
 }
 
 .registration-form {
-    border: solid .5px;
-    border-radius: 5px;
     max-width: 350px;
     margin: 1em auto;
     padding: 1em;
@@ -41,8 +47,6 @@ form h1 {
 }
 
 .login-form {
-    border: solid .5px;
-    border-radius: 5px;
     max-width: 350px;
     margin: 1em auto;
     padding: 1em;
@@ -54,7 +58,6 @@ form h1 {
 }
 
 .galery-container {
-    border: solid 1px;
     margin: auto 3em;
     margin-bottom: 1em;
     padding: 1em;
@@ -74,8 +77,6 @@ form h1 {
 }
 
 .upload-form {
-    border: solid .5px;
-    border-radius: 5px;
     max-width: 375px;
     margin: 1em auto;
     padding: 1em;
