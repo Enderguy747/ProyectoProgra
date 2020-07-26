@@ -5,15 +5,12 @@
 {% block title %} <title>Galería</title> {% endblock %}
 
 {% block content %}
-{% for foto in fotos  %}
-  
-
 <h2 class="text-center">Galería</h2>
 <div class="row row-cols-1 row-cols-md-3 align-items-center galery-container">
+    {% for foto in fotos  %}
     <div class="col mb-4">
         <div class="card">
-            <img src="{{foto.foto.url}}"
-                class="card-img-top img-thumbnail galery-img">
+            <img src="{{foto.foto.url}}" class="card-img-top img-thumbnail galery-img">
             <div class="card-body">
                 <h5 class="card-title">{{foto.nombre}}</h5>
                 <p class="card-text">#{{foto.etiqueta}}</p>
@@ -37,9 +34,8 @@
                 </button>
             </div>
         </div>
-        {% endfor %}
     </div>
-    
+    {% endfor %}
     <div class="col mb-4">
         <div class="card text-center">
             <a href="/cargar">
@@ -56,5 +52,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
