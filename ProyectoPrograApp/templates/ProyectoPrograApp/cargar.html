@@ -6,12 +6,13 @@
 
 {% block content %}
 <h2 class="text-center">Comencemos</h2>
-<form action="{%url 'galeria' %}" class="upload-form text-center" method="POST">
+<form action="" class="upload-form text-center" method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
     <legend class="text-justify">Seleccioná aquí las fotos que querés cargar, y presioná en Continuar para etiquetarlas.
     </legend>
     <div class="form-group">
-        <input type="file" multiple class="form-control-file bg-light" id="exampleFormControlFile1">
+        <input type="file" multiple onchange= "checkFileDetails()"  class="form-control-file bg-light" id="file" required>
+        <p id="fileInfo"></p> 
     </div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-modal">Continuar</button>
     <button type="reset" class="btn btn-secondary">Limpiar</button>
@@ -28,34 +29,43 @@
 
                     <div class="modal-body">
                     <div class="card">
-                        <img src="{% static 'ProyectoPrograApp/img/carrusel-1.jpeg' %}"
-                            class="card-img-top img-thumbnail galery-img">
                         <div class="card-body">
                             <div class="input-group mb-3">
-                                <input type="text" required class="form-control" placeholder="Card title"
+                                <input type="text" required class="form-control" placeholder="Nombre" name="txtNombre"
                                     aria-label="Card title" aria-describedby="basic-addon1">
                             </div>
+                            
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                  
                                 </div>
-                                <input type="text" class="form-control" placeholder="Tag" aria-label="Tag"
-                                    aria-describedby="basic-addon1">
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Etiquetas</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="etiquetas">
+                                        {% for etiquetas in etiqueta  %}
+                                        <option  >{{etiquetas.nombreEtiqueta}}</option>
+                                        {% endfor %}
+                                    
+                                    </select>
+                                  </div>
+                                <!--<input type="text" class="form-control" placeholder="Tag" aria-label="Tag" name="txtEtiqueta"
+                                    aria-describedby="basic-addon1">-->
                             </div>
                             <label class="form-check-label">Privacidad: </label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" required name="inlineRadioOptions"
-                                    id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" required name="privacidad"
+                                    id="inlineRadio1" value="0">
                                 <label class="form-check-label" for="inlineRadio1">Pública</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                    value="option2">
+                                <input class="form-check-input" type="radio" name="privacidad" id="inlineRadio2"
+                                    value="1">
                                 <label class="form-check-label" for="inlineRadio2">Privada</label>
                             </div>
                         </div>
                     </div>
-               
+    
                     
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -92,13 +102,10 @@
                     
                     document.getElementById('fileInfo').innerHTML =
                         document.getElementById('fileInfo').innerHTML + '<br /> ' +
-                            'url: <input type="text" value="' + fileName + '"name="url"> <br />' +
-                            'Nombre <input type="text" name="nombre" > <br>'+
-                            'File Extension: <input type="text" value="' + fileExtension + '"name="tipo"> <br />' +
-                            'Size: <input type="text" value="' + Math.round((fileSize / 1024)) + 'KB "name="tamaño"><br />' +
-                            'Type: <input type="text" value="' + fileType + '"name="tipo"> <br />' +
-                            'Privada: <input type="checkbox" name="Privada"> <br />'
-                           
+                            'url: <input type="hidden" value="' + fileName + '"name="url"> <br />' +
+                            'File Extension: <input type="hidden" value="' + fileExtension + '"name="tipo"> <br />' +
+                            'Size: <input type="hidden" value="' + Math.round((fileSize / 1024)) + '"name="tamaño"><br />' +
+                            'usuario: <input type="hidden" value="{{request.user.id}} " name="Usuario"> <br />'
                             ;
                 }           
                 }
@@ -118,14 +125,11 @@
 
                         document.getElementById('fileInfo').innerHTML =
                             document.getElementById('fileInfo').innerHTML + '<br /> ' +
-                                '<input type="text" value="'+ file.name  +'" name="url"</b> <br />' +
-                                'Nombre <input type="text" name="nombre" > <br>'+
-                                'File Extension: <input type="text" value="' + fileExtension + '"name="tipo"> <br />' +
-                                'Size: <input type="text" value="' + Math.round((file.size / 1024)) + '"name="tipo"> KB <br />' +
-                                'Width: <input type="text" value="' + w + '"name="tipo"> <br/>' +
-                                'Type: <input type="text" value="' + file.type + '"name="tipo"> <br />' +
-                                'Privada: <input type="checkbox" name="Privada"> <br />'
-                                'Privada: <input type="text" value=" " name="Usuario"> <br />'
+                                '<input style="visibility: hidden;" type="hidden" value="'+ file.name  +'" name="txtUrl"</b> <br />' +
+                                '<input style="visibility: hidden;" type="hidden" value="' + fileExtension + '"name="tipo"> <br />' +
+                                '<input style="visibility: hidden;" type="hidden" value="' + Math.round((file.size / 1024)) + '"name="tipo"><br />' +
+                                '<input style="visibility: hidden;" type="hidden" value="' + w + '"name="resolucion"> <br/>' +
+                                '<input style="visibility: hidden;" type="hidden" value="{{request.user.id}} " name="Usuario"> <br />'
 
 
                                 ;

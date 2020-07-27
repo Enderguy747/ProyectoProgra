@@ -11,7 +11,7 @@ class Etiqueta(models.Model):
 
 class Foto(models.Model):
     url = models.CharField(max_length=45, primary_key=True)
-    foto = models.ImageField()
+    foto = models.ImageField(upload_to='')
     Etiqueta = models.ManyToManyField(Etiqueta)
     nombre = models.CharField(max_length=45)
     tipo = models.CharField(max_length=15)

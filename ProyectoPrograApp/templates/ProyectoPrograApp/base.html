@@ -19,8 +19,6 @@
 {% if request.path != '/' %}
 {% if request.path != '/login/' %}
 {% if request.path != '/registrarUsuario/' %}
-
-
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-camera" fill="currentColor"
@@ -45,8 +43,9 @@
                     <a class="nav-link" href="/cargar">Cargar fotos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Crear etiquetas</a>
+                    <a class="nav-link" href="{% url 'etiquetas'%}">Crear Etiquetas</a>
                 </li>
+               
             </ul>
             {% if request.path != '/login/' %}
             {% if request.path != '/registro' %}

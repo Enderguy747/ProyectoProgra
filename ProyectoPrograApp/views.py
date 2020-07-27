@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
-from .models import Foto
+from .models import Foto, Etiqueta
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth.forms import UserCreationForm
-from.forms import CreateUserForm
+from.forms import CreateUserForm, TagForm
 
 
 # Create your views here.
@@ -60,16 +60,29 @@ def logoutUser(request):
 def galeria(request):
     id = request.user
     foto = Foto.objects.filter(idUsuario_id=id)
-    context = {'fotos':foto}
-    return render(request, 'ProyectoPrograApp/galeria.html',context)
+    context = {'fotos': foto}
+    return render(request, 'ProyectoPrograApp/galeria.html', context)
 
 
 @login_required(login_url='login')
 def cargar(request):
-    return render(request, 'ProyectoPrograApp/cargar.html')
+    etiqueta = Etiqueta.objects.all()
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+
+        Etiqueta.objects.all
+    context = {'etiqueta':etiqueta}    
+    return render(request, 'ProyectoPrograApp/cargar.html',context)
 
 
-def shit(request):
-    id = request.user
-    foto = Foto.objects.filter(idUsuario_id=id)
-    return render(request, 'ProyectoPrograApp/try.html', {'fotos': foto})
+@login_required(login_url='login')
+def guardarEtiquetas(request):
+    form = TagForm()
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'form':form}        
+    return render(request,'ProyectoPrograApp/etiqueta.html', context)
+
+

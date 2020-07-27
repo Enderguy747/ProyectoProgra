@@ -11,6 +11,6 @@ urlpatterns = [
     path('registro',views.registro,name='registro'),
     path('cargar',views.cargar,name ="cargar"),
     path('logout',views.logoutUser,name ="logout"),
-    path('img',views.shit,name='img'),
+    path('etiquetas',views.guardarEtiquetas,name='etiquetas'),
 ]
 urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

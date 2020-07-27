@@ -12,6 +12,11 @@ form h1 {
     margin: .5em 0;
 }
 
+#etiqueta{
+align-items: center;
+
+}
+
 .center{
     text-align: center;
 }
