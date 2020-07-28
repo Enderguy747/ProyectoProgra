@@ -102,3 +102,8 @@ align-items: center;
 .btn-index {
     margin-bottom: 1em;
 }
+
+.navbar-text {
+    margin: auto 1em;
+    font-size: 1.1em;
+}

@@ -1,3 +1,4 @@
+from django.core.files.uploadhandler import MemoryFileUploadHandler
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
@@ -7,7 +8,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth.forms import UserCreationForm
 from.forms import CreateUserForm, TagForm
-
 
 # Create your views here.
 
@@ -67,12 +67,26 @@ def galeria(request):
 @login_required(login_url='login')
 def cargar(request):
     etiqueta = Etiqueta.objects.all()
+    fotos = None
     if request.method == 'POST':
         usuario = request.POST.get('usuario')
-
+        fotos = request.FILES['fotos']
         Etiqueta.objects.all
-    context = {'etiqueta': etiqueta}
+    context = {'etiqueta': etiqueta, 'fotos': fotos}
     return render(request, 'ProyectoPrograApp/cargar.html', context)
+
+
+@login_required(login_url='login')
+def cargadas(request):
+    fotos = request.POST.get('fotos')
+    etiqueta = Etiqueta.objects.all()
+    if request.method == 'POST':
+        fotos = request.POST.get('fotos')
+        usuario = request.POST.get('usuario')
+        Etiqueta.objects.all
+
+    context = {'etiqueta': etiqueta}
+    return render(request, 'ProyectoPrograApp/cargadas.html', context)
 
 
 @login_required(login_url='login')

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta content="authenticity_token" name="csrf-param" /> 
+    <meta content="authenticity_token" name="csrf-param" />
     <meta content="4sWPhTlJAmt1IcyNq1FCyivsAVhHqjiDCKRXOgOQock=" name="csrf-token" />
     {% block title %}
     {% endblock %}
@@ -16,10 +16,9 @@
 </head>
 
 <body class="bg-gradient-primary">
-
-{% if request.path != '/' %}
-{% if request.path != '/login/' %}
-{% if request.path != '/registrarUsuario/' %}
+    {% if request.path != '/' %}
+    {% if request.path != '/login/' %}
+    {% if request.path != '/registrarUsuario/' %}
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-camera" fill="currentColor"
@@ -46,15 +45,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'etiquetas'%}">Crear Etiquetas</a>
                 </li>
-               
             </ul>
             {% if request.path != '/login/' %}
             {% if request.path != '/registro' %}
-            <div style="padding-right: 15px; color: antiquewhite;" class="nav-item">
-                <h6>Bienvenido {{request.user}}</h6>
-            </div>
-           <a href="{% url 'logout' %}" class="nav-item nav-link log-link">Cerrar sesión
-               
+            <span class="navbar-text">
+                Bienvenido {{request.user}}
+            </span>
+            <a href="{% url 'logout' %}" class="nav-item nav-link log-link">Cerrar sesión
                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-box-arrow-right" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     {% endif %}
