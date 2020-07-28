@@ -6,11 +6,13 @@
 
 {% block content %}
 <h2 class="text-center">Comencemos</h2>
-<form class="upload-form text-center border border-dark rounded">
+<form action="" class="upload-form text-center" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
     <legend class="text-justify">Seleccioná aquí las fotos que querés cargar, y presioná en Continuar para etiquetarlas.
     </legend>
     <div class="form-group">
-        <input type="file" multiple class="form-control-file bg-light" id="exampleFormControlFile1">
+        <input type="file" multiple onchange= "checkFileDetails()"  class="form-control-file bg-light" id="file" required>
+        <p id="fileInfo"></p> 
     </div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-modal">Continuar</button>
     <button type="reset" class="btn btn-secondary">Limpiar</button>
@@ -24,98 +26,118 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+
+                    <div class="modal-body">
                     <div class="card">
-                        <img src="{% static 'ProyectoPrograApp/img/carrusel-1.jpeg' %}"
-                            class="card-img-top img-thumbnail galery-img">
                         <div class="card-body">
                             <div class="input-group mb-3">
-                                <input type="text" required class="form-control" placeholder="Card title"
+                                <input type="text" required class="form-control" placeholder="Nombre" name="txtNombre"
                                     aria-label="Card title" aria-describedby="basic-addon1">
                             </div>
+                            
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">#</span>
+                                  
                                 </div>
-                                <input type="text" class="form-control" placeholder="Tag" aria-label="Tag"
-                                    aria-describedby="basic-addon1">
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Etiquetas</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="etiquetas">
+                                        {% for etiquetas in etiqueta  %}
+                                        <option  >{{etiquetas.nombreEtiqueta}}</option>
+                                        {% endfor %}
+                                    
+                                    </select>
+                                  </div>
+                                <!--<input type="text" class="form-control" placeholder="Tag" aria-label="Tag" name="txtEtiqueta"
+                                    aria-describedby="basic-addon1">-->
                             </div>
                             <label class="form-check-label">Privacidad: </label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" required name="inlineRadioOptions"
-                                    id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" required name="privacidad"
+                                    id="inlineRadio1" value="0">
                                 <label class="form-check-label" for="inlineRadio1">Pública</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                    value="option2">
+                                <input class="form-check-input" type="radio" name="privacidad" id="inlineRadio2"
+                                    value="1">
                                 <label class="form-check-label" for="inlineRadio2">Privada</label>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <img src="{% static 'ProyectoPrograApp/img/carrusel-2.jpg' %}"
-                            class="card-img-top img-thumbnail galery-img">
-                        <div class="card-body">
-                            <div class="input-group mb-3">
-                                <input type="text" required class="form-control" placeholder="Card title"
-                                    aria-label="Card title" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">#</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Tag" aria-label="Tag"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                            <label class="form-check-label">Privacidad: </label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" required name="inlineRadioOptions"
-                                    id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Pública</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                    value="option2">
-                                <label class="form-check-label" for="inlineRadio2">Privada</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="{% static 'ProyectoPrograApp/img/carrusel-3.jpg' %}"
-                            class="card-img-top img-thumbnail galery-img">
-                        <div class="card-body">
-                            <div class="input-group mb-3">
-                                <input type="text" required class="form-control" placeholder="Card title"
-                                    aria-label="Card title" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">#</span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Tag" aria-label="Tag"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                            <label class="form-check-label">Privacidad: </label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" required name="inlineRadioOptions"
-                                    id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Pública</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                    value="option2">
-                                <label class="form-check-label" for="inlineRadio2">Privada</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    
+                    
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <input type="submit" value="Guardar" class="btn btn-primary">
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+<script>
+    function checkFileDetails() {
+        var fi = document.getElementById('file');
+        if (fi.files.length > 0) {      // FIRST CHECK IF ANY FILE IS SELECTED.
+           
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+                var fileName, fileExtension, fileSize, fileType, dateModified;
+
+                // FILE NAME AND EXTENSION.
+                fileName = fi.files.item(i).name;
+                fileExtension = fileName.replace(/^.*\./, '');
+
+                // CHECK IF ITS AN IMAGE FILE.
+                // TO GET THE IMAGE WIDTH AND HEIGHT, WE'LL USE fileReader().
+                if (fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg') {
+                   readImageFile(fi.files.item(i));             // GET IMAGE INFO USING fileReader().
+                }
+                else {
+                    // IF THE FILE IS NOT AN IMAGE.
+                        
+                    fileSize = fi.files.item(i).size;  // FILE SIZE.
+                    fileType = fi.files.item(i).type;  // FILE TYPE.
+                    dateModified = fi.files.item(i).lastModifiedDate;  // FILE LAST MODIFIED.
+                    
+                    document.getElementById('fileInfo').innerHTML =
+                        document.getElementById('fileInfo').innerHTML + '<br /> ' +
+                            'url: <input type="hidden" value="' + fileName + '"name="url"> <br />' +
+                            'File Extension: <input type="hidden" value="' + fileExtension + '"name="tipo"> <br />' +
+                            'Size: <input type="hidden" value="' + Math.round((fileSize / 1024)) + '"name="tamaño"><br />' +
+                            'usuario: <input type="hidden" value="{{request.user.id}} " name="Usuario"> <br />'
+                            ;
+                }           
+                }
+            }
+
+            // GET THE IMAGE WIDTH AND HEIGHT USING fileReader() API.
+            function readImageFile(file) {
+                var reader = new FileReader(); // CREATE AN NEW INSTANCE.
+
+                reader.onload = function (e) {
+                    var img = new Image();      
+                    img.src = e.target.result;
+
+                    img.onload = function () {
+                        var w = this.width;
+                        var h = this.height;
+
+                        document.getElementById('fileInfo').innerHTML =
+                            document.getElementById('fileInfo').innerHTML + '<br /> ' +
+                                '<input style="visibility: hidden;" type="hidden" value="'+ file.name  +'" name="txtUrl"</b> <br />' +
+                                '<input style="visibility: hidden;" type="hidden" value="' + fileExtension + '"name="tipo"> <br />' +
+                                '<input style="visibility: hidden;" type="hidden" value="' + Math.round((file.size / 1024)) + '"name="tipo"><br />' +
+                                '<input style="visibility: hidden;" type="hidden" value="' + w + '"name="resolucion"> <br/>' +
+                                '<input style="visibility: hidden;" type="hidden" value="{{request.user.id}} " name="Usuario"> <br />'
+
+
+                                ;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+</script>
 {% endblock %}

@@ -1,22 +1,30 @@
-from django.shortcuts import render
-from django.http import HttpRequest
-from .forms import FormRegistro
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login as auth_login, logout
+from .models import Foto, Etiqueta
 from django.contrib.auth.decorators import login_required
-from .models import Foto
+from django.shortcuts import render, redirect
+from django.http import HttpRequest
+from django.contrib.auth.forms import UserCreationForm
+from.forms import CreateUserForm, TagForm
+
 
 # Create your views here.
 
-def registro(request):
-        form = FormRegistro()
 
+def registro(request):
+    if request.user.is_authenticated:
+        return redirect('galeria')
+    else:
+        form = CreateUserForm()
         if request.method == 'POST':
-            form = FormRegistro(request.POST)
+            form = CreateUserForm(request.POST)
             if form.is_valid():
                 form.save()
-        context = {'form':form}
-        return render(request, 'ProyectoPrograApp/registro.html',context)
+                return redirect('login')
 
+    context = {'form': form}
+    return render(request, 'ProyectoPrograApp/registro.html', context)
 
 
 def index(request):
@@ -24,18 +32,55 @@ def index(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('galeria')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                auth_login(request, user)
+                return redirect('galeria')
+            else:
+                messages.info(request, 'Usuario y/o Contraseña incorrectos')
+                return render(request, 'ProyectoPrograApp/login.html')
     return render(request, 'ProyectoPrograApp/login.html')
 
 
+def logoutUser(request):
+    logout(request)
+
+    return redirect('login')
+
+
+@login_required(login_url='login')
 def galeria(request):
+    id = request.user
+    foto = Foto.objects.filter(idUsuario_id=id)
+    context = {'fotos': foto}
+    return render(request, 'ProyectoPrograApp/galeria.html', context)
 
-    return render(request, 'ProyectoPrograApp/galeria.html')
 
-
+@login_required(login_url='login')
 def cargar(request):
-    return render(request, 'ProyectoPrograApp/cargar.html')
+    etiqueta = Etiqueta.objects.all()
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+
+        Etiqueta.objects.all
+    context = {'etiqueta': etiqueta}
+    return render(request, 'ProyectoPrograApp/cargar.html', context)
 
 
-def shit(request):
-    fotos = Foto.objects.all()
-    return render(request,'ProyectoPrograApp/try.html',{'fotos':fotos})
+@login_required(login_url='login')
+def guardarEtiquetas(request):
+    form = TagForm()
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'form': form}
+    return render(request, 'ProyectoPrograApp/etiqueta.html', context)
