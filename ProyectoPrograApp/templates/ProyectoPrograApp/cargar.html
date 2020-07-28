@@ -1,26 +1,28 @@
 {% extends "ProyectoPrograApp/base.html" %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %} <title>Cargar fotos</title> {% endblock %}
 
 {% block content %}
 <h2 class="text-center">Comencemos</h2>
-<h1>{{form}}</h1>
-<form action="/cargadas" class="upload-form text-center border border-dark rounded" method="POST" enctype="multipart/form-data">
+
+<form action="" class="upload-form text-center border border-dark rounded" method="POST" enctype="multipart/form-data" novalidate="">
     {% csrf_token %}
     <legend class="text-justify">Seleccioná aquí las fotos que querés cargar, y presioná en Continuar para etiquetarlas.
     </legend>
     <div class="form-group">
         <!-- onchange="checkFileDetails()"  -->
-        <input type="file" multiple required class="form-control-file bg-light" id="file" name="fotos">
+        {{form|crispy}}
+        <!--<input type="file" multiple required class="form-control-file bg-light" id="file" name="fotos">-->
     </div>
-    <button type="submit" class="btn btn-primary">Continuar</button>
+    <button type="submit" onclick="checkFileDetails()" class="btn btn-primary" >Continuar</button>
     <button type="reset" class="btn btn-secondary">Limpiar</button>
 </form>
 <script>
     function checkFileDetails() {
-        var fi = document.getElementById('file');
+        var fi = document.getElementById('id_foto');
         if (fi.files.length > 0) {      // FIRST CHECK IF ANY FILE IS SELECTED.
 
             for (var i = 0; i <= fi.files.length - 1; i++) {
@@ -42,7 +44,7 @@
                     fileType = fi.files.item(i).type;  // FILE TYPE.
                     dateModified = fi.files.item(i).lastModifiedDate;  // FILE LAST MODIFIED.
 
-                    document.getElementById('fileInfo').innerHTML =
+                    document.getElementById('id_foto').innerHTML =
                         document.getElementById('fileInfo').innerHTML + '<br /> ' +
                         'url: <input type="hidden" value="' + fileName + '"name="url"> <br />' +
                         'File Extension: <input type="hidden" value="' + fileExtension + '"name="tipo"> <br />' +
@@ -65,7 +67,9 @@
                     var w = this.width;
                     var h = this.height;
 
-                    document.getElementById('fileInfo').innerHTML =
+                    
+                    document.getElementById('id_url').value = '{{request.user.id}}';
+                    /*document.getElementById('fileInfo').innerHTML =
                         document.getElementById('fileInfo').innerHTML + '<br /> ' +
                         '<input style="visibility: hidden;" type="hidden" value="' + file.name + '" name="txtUrl"</b> <br />' +
                         '<input style="visibility: hidden;" type="hidden" value="' + fileExtension + '"name="tipo"> <br />' +
@@ -73,6 +77,7 @@
                         '<input style="visibility: hidden;" type="hidden" value="' + w + '"name="resolucion"> <br/>' +
                         '<input style="visibility: hidden;" type="hidden" value="{{request.user.id}} " name="Usuario"> <br />'
                         ;
+                        */
                 }
             };
             reader.readAsDataURL(file);
