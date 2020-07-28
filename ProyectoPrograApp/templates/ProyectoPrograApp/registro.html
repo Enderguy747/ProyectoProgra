@@ -10,20 +10,19 @@
     <h1 class="text-center">Formulario</h1>
 
 
-        <form action="#" class="form registration-form" method="POST" > {% csrf_token %}
+        <form action="#" class="form registration-form border border-dark rounded" method="POST" > {% csrf_token %}
         <fieldset>
 
          {% if form.errors %}
         <div class="alert alert-danger" role="alert">
-        Ha ocurrido un error en los datos, Revise.
+            Ha ocurrido un error en los datos, Revise.
         </div>
         {% else %}
         {% if form.is_valid %}
         <div class="alert alert-success" role="alert">
             Registro Completo
-           </div>
+        </div>
         {% endif %}
-         
         {% endif %}
           <legend class="text-justify">Por favor complete el siguiente formulario para crear su cuenta.</legend>
           

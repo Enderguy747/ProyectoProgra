@@ -10,6 +10,7 @@ urlpatterns = [
     path('galeria',views.galeria,name ="galeria"),
     path('registro',views.registro,name='registro'),
     path('cargar',views.cargar,name ="cargar"),
+    path('try',views.shit,name ="try"),
     path('logout',views.logoutUser,name ="logout"),
     path('etiquetas',views.guardarEtiquetas,name='etiquetas'),
 ]

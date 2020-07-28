@@ -9,9 +9,8 @@
     {% include "ProyectoPrograApp/indexBase.html" %}
 </div>
 <div class="login-container">
-    <form action="" class="login-form" method="POST">
-    {% csrf_token %}
-
+    <form action="" class="login-form border border-dark rounded" method="POST">
+        {% csrf_token %}
         <h1 class="text-center">Bienvenido</h1>
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Usuario" name="username" required>
@@ -26,8 +25,7 @@
         {% endfor %}
         <button type="submit" id="btnLogin" class="btn btn-login btn-block btn-primary">Iniciar sesión</button>
         <a href="{% url 'registro' %}" class="btn btn-login btn-block btn-secondary">Registrarse</a>
-         <a href="{% url 'index' %}" class="btn btn-login btn-block btn-secondary">Volver</a>
-
+        <a href="{% url 'index' %}" class="btn btn-login btn-block btn-secondary">Volver</a>
     </form>
 </div>
 {% endblock %}
